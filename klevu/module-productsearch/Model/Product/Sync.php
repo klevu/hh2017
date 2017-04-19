@@ -1435,7 +1435,7 @@ class Sync extends \Klevu\Search\Model\Sync {
 		$config = $this->_searchHelperConfig;
 		
 		if($config->isCollectionMethodEnabled()) {
-			$data = $this->_catalogModelProduct->getCollection()
+			$data = \Magento\Framework\App\ObjectManager::getInstance()->create('Magento\Catalog\Model\ResourceModel\Product\Collection')
 				->addIdFilter($product_ids)
 				->setStore($this->_storeModelStoreManagerInterface->getStore())
 				->addStoreFilter()
