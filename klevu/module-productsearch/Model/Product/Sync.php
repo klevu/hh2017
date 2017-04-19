@@ -2124,6 +2124,7 @@ class Sync extends \Klevu\Search\Model\Sync {
                     )
                 )
                 ->where("s.product_id IN (?)", $product_ids)
+                ->where("s.website_id = ?", $this->_storeModelStoreManagerInterface->getStore()->getWebsiteId())
         );
 
         $data = array();
