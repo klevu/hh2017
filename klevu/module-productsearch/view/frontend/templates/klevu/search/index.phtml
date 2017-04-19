@@ -39,7 +39,7 @@
             </div>
             
             <div class="kuPerPage">
-              <label><?php echo __('Items per page');?>:</label>
+              <label id="totalItems"></label>
               <select onchange="klevu_changeItemsPerPage(this.value);" id="noOfRecords1">
                     <?php  
 							$per_page = explode(",",\Magento\Framework\App\ObjectManager::getInstance()->get('Magento\Framework\App\Config\ScopeConfigInterface')->getValue("catalog/frontend/grid_per_page_values"));
@@ -71,7 +71,7 @@
         
         <div class="kuBottomPagi">
           <div class="kuPerPage">
-            <label><?php echo __('Items per page');?>:</label>
+            <label><?php echo __('Show');?>:</label>
             <select onchange="klevu_changeItemsPerPage(this.value);" id="noOfRecords2">
                     <?php   
                             if(!empty($per_page)){
@@ -80,6 +80,7 @@
                       <?php     } 
                            }?>
             </select>
+            <label><?php echo __('per page');?></label>
           </div>
           
           <div class="kuPagination" id="kuPagination2">
@@ -148,4 +149,5 @@ $src = $protocol.$config->getJsUrl();
 <script type="text/javascript">// <![CDATA[
 document.getElementById("searchedKeyword").value= klevu_getParamValue("q");
 // ]]></script>
+<script src="<?php echo $block->getViewFileUrl('Klevu_Search::js/klevu-user-customization.js')?>"  type="text/javascript"></script>
 
