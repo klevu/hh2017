@@ -1724,20 +1724,20 @@ class Sync extends \Klevu\Search\Model\Sync {
 								if ($parent && $parent->getData("type_id") == \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE) {
 									
 									// Calculate configurable product price based on option values
-									$ruleprice = $this->calculateFinalPriceFront($parent,\Magento\Customer\Model\Group::NOT_LOGGED_IN_ID,$parent->getId(),$this->_storeModelStoreManagerInterface->getStore());
+									$ruleprice = $this->calculateFinalPriceFront($item,\Magento\Customer\Model\Group::NOT_LOGGED_IN_ID,$item->getId(),$this->_storeModelStoreManagerInterface->getStore());
 									if(!empty($ruleprice)){
-										$fprice = min($ruleprice,$parent->getData('final_price'));    
+										$fprice = min($ruleprice,$item->getData('final_price'));    
 									} else {
-										$fprice = $parent->getData('final_price');
+										$fprice = $item->getData('final_price');
 									}
 
-									$price = (isset($fprice)) ? $fprice: $parent->getData('final_price');
+									$price = (isset($fprice)) ? $fprice: $item->getData('final_price');
 
 									// show low price for config products
-									$product['startPrice'] = $this->processPrice($price , $parent);
+									$product['startPrice'] = $this->processPrice($price , $item);
 									
 									// also send sale price for sorting and filters for klevu 
-									$product['salePrice'] = $this->processPrice($price , $parent);
+									$product['salePrice'] = $this->processPrice($price , $item);
 								} else {
 									// Use price index prices to set the product price and start/end prices if available
 									// Falling back to product price attribute if not
@@ -1791,20 +1791,20 @@ class Sync extends \Klevu\Search\Model\Sync {
 								if ($parent && $parent->getData("type_id") == \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE) {
 									
 									// Calculate configurable product price based on option values
-									$ruleprice = $this->calculateFinalPriceFront($parent,\Magento\Customer\Model\Group::NOT_LOGGED_IN_ID,$parent->getId(),$this->_storeModelStoreManagerInterface->getStore());
+									$ruleprice = $this->calculateFinalPriceFront($item,\Magento\Customer\Model\Group::NOT_LOGGED_IN_ID,$item->getId(),$this->_storeModelStoreManagerInterface->getStore());
 									if(!empty($ruleprice)){
-										$fprice = min($ruleprice,$parent->getPriceInfo()->getPrice('final_price')->getAmount()->getValue(\Magento\Tax\Pricing\Adjustment::ADJUSTMENT_CODE));    
+										$fprice = min($ruleprice,$item->getPriceInfo()->getPrice('final_price')->getAmount()->getValue(\Magento\Tax\Pricing\Adjustment::ADJUSTMENT_CODE));    
 									} else {
-										$fprice = $parent->getPriceInfo()->getPrice('final_price')->getAmount()->getValue(\Magento\Tax\Pricing\Adjustment::ADJUSTMENT_CODE);
+										$fprice = $item->getPriceInfo()->getPrice('final_price')->getAmount()->getValue(\Magento\Tax\Pricing\Adjustment::ADJUSTMENT_CODE);
 									}
 
-									$price = (isset($fprice)) ? $fprice: $parent->getPriceInfo()->getPrice('final_price')->getAmount()->getValue(\Magento\Tax\Pricing\Adjustment::ADJUSTMENT_CODE);
+									$price = (isset($fprice)) ? $fprice: $item->getPriceInfo()->getPrice('final_price')->getAmount()->getValue(\Magento\Tax\Pricing\Adjustment::ADJUSTMENT_CODE);
 
 									// show low price for config products
-									$product['startPrice'] = $this->processPrice($price , $parent);
+									$product['startPrice'] = $this->processPrice($price , $item);
 									
 									// also send sale price for sorting and filters for klevu 
-									$product['salePrice'] = $this->processPrice($price , $parent);
+									$product['salePrice'] = $this->processPrice($price , $item);
 								} else {
 									// Use price index prices to set the product price and start/end prices if available
 									// Falling back to product price attribute if not
